@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azmine Mansur - Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #151b3d;
+            --bg-card: #1a2142;
+            --text-primary: #e8edf5;
+            --text-secondary: #a8b2d1;
+            --accent: #00d9ff;
+            --accent-hover: #00b8d4;
+            --accent-dim: rgba(0, 217, 255, 0.1);
+            --border: rgba(168, 178, 209, 0.1);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--accent) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, #ff006e 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, #8338ec 0%, transparent 50%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 100px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 4rem 0;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-label {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: fadeIn 0.8s 0.2s ease-out backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s 0.3s ease-out backwards;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 0.8s 0.4s ease-out backwards;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 0.8s 0.5s ease-out backwards;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-hover);
+            transition: left 0.3s;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-secondary::before {
+            background: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            color: var(--bg-primary);
+        }
+
+        /* Section Styles */
+        section {
+            margin: 8rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .experience-card:hover {
+            border-color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        .experience-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-company {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-location {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .experience-date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .experience-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, margin-top 0.3s ease;
+        }
+
+        .experience-card.expanded .experience-details {
+            max-height: 1000px;
+            margin-top: 1.5rem;
+        }
+
+        .experience-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-details li {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .experience-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .expand-indicator {
+            display: inline-block;
+            margin-left: 0.5rem;
+            color: var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .experience-card.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .skill-category h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: var(--accent-dim);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-secondary);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .blog-post {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .blog-post:hover {
+            border-color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-category {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .blog-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .blog-post:hover .read-more {
+            gap: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 8rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-links {
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AM</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="about">
+            <div class="hero-content">
+                <div class="hero-label">// Software Engineer</div>
+                <h1>Azmine Mansur</h1>
+                <p>Computer Science grad from NYU building scalable systems and machine learning solutions. Currently working with HPC, distributed computing, and full-stack development.</p>
+                <div class="hero-links">
+                    <a href="mailto:am11286@nyu.edu" class="btn"><span>Get in Touch</span></a>
+                    <a href="https://github.com/Azmine29" class="btn btn-secondary"><span>View GitHub</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="fade-in-section">
+            <div class="section-header">
+                <div class="section-label">// Work History</div>
+                <h2 class="section-title">Experience</h2>
+            </div>
+
+            <div class="experience-grid">
+                <div class="experience-card" onclick="this.classList.toggle('expanded')">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Software Engineer <span class="expand-indicator">▼</span></h3>
+                            <div class="experience-company">NYU High Performance Computing</div>
+                            <div class="experience-location">New York City, NY</div>
+                        </div>
+                        <div class="experience-date">Sep 2024 - Aug 2025</div>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Designed and implemented an LLM Chatbot for new HPC members using RAG and generating embeddings using JinaV3 and GPT 4o mini for responses.</li>
+                            <li>Developed a distributed NLP pipeline on Google Dataproc using PySpark, spaCy, and HuggingFace BERT to preprocess large-scale text datasets (MS MARCO, Kaggle) and generate high-dimensional embeddings stored in Parquet/HDFS.</li>
+                            <li>Built scalable infrastructure for processing millions of documents in parallel, optimizing compute resources across distributed clusters.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-card" onclick="this.classList.toggle('expanded')">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Software Engineer Intern <span class="expand-indicator">▼</span></h3>
+                            <div class="experience-company">X-Cap-Market</div>
+                            <div class="experience-location">New York City, NY</div>
+                        </div>
+                        <div class="experience-date">May 2024 - Aug 2024</div>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Utilized Python to allow for files to be uploaded in the frontend to be safely stored into AWS S3 buckets, improving functionality for clients.</li>
+                            <li>Designed and implemented a Historical Database of Press Releases by integrating Comtex API and storing into DynamoDB, launched as an AWS Lambda service allowing users to summarize Press Releases for slide decks.</li>
+                            <li>Redesigned and converted Bubble Frontend into a more responsive and user-friendly site with React and Tailwind, increasing user engagement by 20%.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-card" onclick="this.classList.toggle('expanded')">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">Software Engineer <span class="expand-indicator">▼</span></h3>
+                            <div class="experience-company">New York University IT</div>
+                            <div class="experience-location">New York City, NY</div>
+                        </div>
+                        <div class="experience-date">May 2023 - Aug 2023</div>
+                    </div>
+                    <div class="experience-details">
+                        <ul>
+                            <li>Designed and developed the UI of NYU Study Away website and implemented bug fixes on existing UI using Figma, Next.js, Tailwind, and Typescript. Integrated GraphQL API for flexible data retrieval.</li>
+                            <li>Designed and developed the backend/database for a transfer portal website using MySQL and Node.js.</li>
+                            <li>Collaborated with cross-functional teams to deliver features on schedule and improve user experience across university platforms.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="fade-in-section">
+            <div class="section-header">
+                <div class="section-label">// Technical Expertise</div>
+                <h2 class="section-title">Skills</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Swift</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">Keras</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Databases & Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">DynamoDB</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">S3</span>
+                        <span class="skill-tag">Lambda</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">PySpark</span>
+                        <span class="skill-tag">CUDA</span>
+                        <span class="skill-tag">GraphQL</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">Jupyter</span>
+                        <span class="skill-tag">Vercel</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Blog Section -->
+        <section id="blog" class="fade-in-section">
+            <div class="section-header">
+                <div class="section-label">// Thoughts & Writing</div>
+                <h2 class="section-title">Blog</h2>
+            </div>
+
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="social-links">
+                <a href="mailto:am11286@nyu.edu">Email</a>
+                <a href="https://github.com/Azmine29" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/azmine-mansur-149b651b9/" target="_blank">LinkedIn</a>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                © 2025 Azmine Mansur. Built with care.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

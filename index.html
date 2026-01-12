@@ -33,7 +33,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -54,7 +53,6 @@
             50% { transform: translate(50px, 30px) scale(1.1); }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -122,7 +120,6 @@
             width: 100%;
         }
 
-        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -130,7 +127,6 @@
             padding-top: 100px;
         }
 
-        /* Hero Section */
         .hero {
             min-height: calc(100vh - 100px);
             display: flex;
@@ -246,7 +242,6 @@
             color: var(--bg-primary);
         }
 
-        /* Section Styles */
         section {
             margin: 8rem 0;
         }
@@ -270,7 +265,6 @@
             color: var(--text-primary);
         }
 
-        /* Experience Cards */
         .experience-grid {
             display: grid;
             gap: 2rem;
@@ -380,7 +374,6 @@
             transform: rotate(180deg);
         }
 
-        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -426,7 +419,6 @@
             color: var(--bg-primary);
         }
 
-        /* Projects */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -438,7 +430,6 @@
             border: 1px solid var(--border);
             padding: 2rem;
             transition: all 0.3s;
-            cursor: pointer;
         }
 
         .project-card:hover {
@@ -475,7 +466,6 @@
             border: 1px solid var(--border);
         }
 
-        /* Blog Section */
         .blog-grid {
             display: grid;
             gap: 2rem;
@@ -486,7 +476,6 @@
             border: 1px solid var(--border);
             padding: 2.5rem;
             transition: all 0.3s;
-            cursor: pointer;
             position: relative;
         }
 
@@ -501,6 +490,7 @@
             margin-bottom: 1rem;
             font-size: 0.85rem;
             color: var(--text-secondary);
+            align-items: center;
         }
 
         .blog-category {
@@ -521,23 +511,9 @@
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 1.5rem;
+            white-space: pre-wrap;
         }
 
-        .read-more {
-            color: var(--accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s;
-        }
-
-        .blog-post:hover .read-more {
-            gap: 1rem;
-        }
-
-        /* Footer */
         footer {
             margin-top: 8rem;
             padding: 3rem 0;
@@ -562,7 +538,6 @@
             color: var(--accent);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 gap: 1.5rem;
@@ -591,7 +566,6 @@
             }
         }
 
-        /* Scroll Animations */
         .fade-in-section {
             opacity: 0;
             transform: translateY(30px);
@@ -621,20 +595,18 @@
     </nav>
 
     <div class="container">
-        <!-- Hero Section -->
         <section class="hero" id="about">
             <div class="hero-content">
                 <div class="hero-label">// Software Engineer</div>
                 <h1>Azmine Mansur</h1>
-                <p>Computer Science grad from NYU building scalable systems and machine learning solutions. Currently working with HPC, distributed computing, and full-stack development.</p>
+                <p>Interested in all kinds of stuff.</p>
                 <div class="hero-links">
                     <a href="mailto:am11286@nyu.edu" class="btn"><span>Get in Touch</span></a>
-                    <a href="https://github.com/Azmine29" class="btn btn-secondary"><span>View GitHub</span></a>
+                    <a href="https://github.com/Azmine29" target="_blank" class="btn btn-secondary"><span>View GitHub</span></a>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section id="experience" class="fade-in-section">
             <div class="section-header">
                 <div class="section-label">// Work History</div>
@@ -698,7 +670,6 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
         <section id="skills" class="fade-in-section">
             <div class="section-header">
                 <div class="section-label">// Technical Expertise</div>
@@ -764,18 +735,100 @@
             </div>
         </section>
 
+        <section id="projects" class="fade-in-section">
+            <div class="section-header">
+                <div class="section-label">// Selected Work</div>
+                <h2 class="section-title">Projects</h2>
+            </div>
 
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Premier League Match Prediction</h3>
+                    <p class="project-description">
+                        Developed a machine learning model to predict Premier League match outcomes (W/L/D) using data from the last 4 seasons and current season, achieving 68% accuracy on unseen data. Utilized gradient boosting and neural networks, with continuous model updates based on recent team performance.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Gradient Boosting</span>
+                        <span class="tech-tag">Neural Networks</span>
+                    </div>
+                </div>
 
-        <!-- Blog Section -->
+                <div class="project-card">
+                    <h3 class="project-title">Stock Performance Dashboard</h3>
+                    <p class="project-description">
+                        Finance-based website that analyzes Stock Market trends using Flask, HTML, CSS, React, stored in MySQL, and hosted on Vercel. Utilized Yahoo API for fetching real-time and historical data/news on S&P 500 stocks. Implemented performance and visual analysis with charts displaying RSI and Bollinger bands.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Yahoo API</span>
+                        <span class="tech-tag">Vercel</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">TaskMaster</h3>
+                    <p class="project-description">
+                        Created a REST API for Task Management with Go and its Gin framework, implementing basic CRUD features using PostgreSQL as a database. Implemented 2FA and HTTPS to encrypt all data transmissions and real-time notifications using web sockets.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Go</span>
+                        <span class="tech-tag">Gin</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">2FA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="blog" class="fade-in-section">
             <div class="section-header">
                 <div class="section-label">// Thoughts & Writing</div>
                 <h2 class="section-title">Blog</h2>
             </div>
 
+            <div class="blog-grid">
+                <!-- TO ADD A NEW POST: Copy everything between the <!-- POST START --> and <!-- POST END --> comments below -->
+                
+                <!-- POST START -->
+                <!-- Uncomment this template and fill in your content to add a post
+                <div class="blog-post">
+                    <div class="blog-meta">
+                        <span class="blog-category">CATEGORY HERE</span>
+                        <span class="blog-date">Month Day, Year</span>
+                    </div>
+                    <h3 class="blog-title">Your Post Title Here</h3>
+                    <p class="blog-excerpt">
+                        Write your blog post content here. You can write as much as you want.
+                        Just keep writing in this paragraph tag.
+                    </p>
+                </div>
+                -->
+                <!-- POST END -->
 
+                <!-- Example Post - Delete this once you add your own posts -->
+                <div class="blog-post">
+                    <div class="blog-meta">
+                        <span class="blog-category">Welcome</span>
+                        <span class="blog-date">January 12, 2025</span>
+                    </div>
+                    <h3 class="blog-title">Getting Started with My Blog</h3>
+                    <p class="blog-excerpt">
+                        Going to put together some of my thoughts on the current events in Tech and Geopolitics.
+                        Sometimes might even give life updates.
+                        Hoping to update this frequently with my thoughts because I want to practice writing more long form pieces.
+                    </p>
+                </div>
 
-        <!-- Footer -->
+                <!-- Add new posts below this line -->
+                
+            </div>
+        </section>
+
         <footer>
             <div class="social-links">
                 <a href="mailto:am11286@nyu.edu">Email</a>
